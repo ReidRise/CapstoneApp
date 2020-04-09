@@ -55,22 +55,23 @@ class FirstViewController: UIViewController, CBPeripheralDelegate, CBCentralMana
         // velocity_y.append(input!) // Adds Velocity to dataset *test*
         weight = input! // Set weight to input
         
-        // Calculate avg velocity and display
-        let velocity_temp = velocity_y
-        let velocity_sum = velocity_temp.reduce(0, +) // Calculate sum of velocities
-        let velocity_avg = (velocity_sum / Double(velocity_y.count)) // Divide by number of entries to get the average
+        // Calculate avg velocity and populate acceleration array for power calculation
+        var velocity_sum = 0.0
+        var distance = 0.0
+        for i in 0 ..< velocity_y.count {
+            if velocity_y[i] > 0.0 {
+                velocity_sum += velocity_y[i]                         // Add velocity of to the sum of velocities
+                distance += velocity_y[i] * 0.01
+            }
+        }
+        let velocity_avg = (velocity_sum / Double(velocity_y.count))  // Divide by number of entries to get the average
         txtAvgVel.text = String(velocity_avg) // display this velocity
         
         // Calculate total time elapsed from inputs.
-        total_time = Double(velocity_y.count) * 0.01 // Multiplies the number of samples by the sample rate to determine total time
+        total_time = Double(velocity_y.count) * 0.01                  // Multiplies the number of samples by the sample rate to determine total time
         
         // Calculate and display total power
-        var work_data:[Double] = []
-        for i in 0 ..< acceleration_y.count{
-            work_data.append(acceleration_y[i] * weight) // Estimate power of each sample (left bias rectangle estimation)
-        }
-        let work_temp = work_data // Create a temporary array to reduce
-        let total_power = work_temp.reduce(0, +) / total_time // Calculate sum of work and divide it by the total time
+        let total_power = ((weight * 9.8) * distance) / total_time    // Calculate sum of work and divide it by the total time
         txtTotPower.text = String(total_power)
         
         updateGraph()
@@ -271,6 +272,15 @@ class FirstViewController: UIViewController, CBPeripheralDelegate, CBCentralMana
             deviation = tan_vel * Double(i)
             velocity_y[i] -= deviation
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let detailViewController = segue.destination as? SecondViewController
+            else {
+                return
+        }
+        detailViewController.vel_x = velocity_x
+        detailViewController.vel_y = velocity_y
     }
 }
 
