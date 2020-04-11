@@ -263,24 +263,26 @@ class FirstViewController: UIViewController, CBPeripheralDelegate, CBCentralMana
         }
         // Normalize Velocity
         normalizeCurve()
+        imuData.sharedData.velocity_x = velocity_x
+        imuData.sharedData.velocity_y = velocity_y
     }
     
     func normalizeCurve (){
-        let tan_vel = velocity_y[velocity_y.count - 1] / Double(velocity_y.count) // Find the tanget of the diviation
+        let tan_vely = velocity_y[velocity_y.count - 1] / Double(velocity_y.count) // Find the tangent of the diviation
         var deviation = 0.0
+        
         for i in 1 ..< velocity_y.count {
-            deviation = tan_vel * Double(i)
+            deviation = tan_vely * Double(i)
             velocity_y[i] -= deviation
+        }
+        
+        let tan_velx = velocity_x[velocity_x.count - 1] / Double(velocity_x.count) // Find the tangent of the diviation
+        
+        for i in 1 ..< velocity_x.count {
+            deviation = tan_velx * Double(i)
+            velocity_x[i] -= deviation
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let detailViewController = segue.destination as? SecondViewController
-            else {
-                return
-        }
-        detailViewController.vel_x = velocity_x
-        detailViewController.vel_y = velocity_y
-    }
 }
 

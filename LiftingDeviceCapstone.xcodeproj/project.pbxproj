@@ -22,6 +22,7 @@
 		DC116BEC2427F8BC0093C40B /* LiftingDeviceCapstoneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC116BEB2427F8BC0093C40B /* LiftingDeviceCapstoneUITests.swift */; };
 		DCB5287624301BE300EF53A0 /* WeightPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB5287524301BE300EF53A0 /* WeightPeripheral.swift */; };
 		DCF028ED24311D2B003139CC /* libCharts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DCF028EC24311D2B003139CC /* libCharts.a */; };
+		DCF028EF243FA06D003139CC /* imuData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF028EE243FA06D003139CC /* imuData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		DCB5287524301BE300EF53A0 /* WeightPeripheral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightPeripheral.swift; sourceTree = "<group>"; };
 		DCF028E82430F1A9003139CC /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCF028EC24311D2B003139CC /* libCharts.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libCharts.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCF028EE243FA06D003139CC /* imuData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imuData.swift; sourceTree = "<group>"; };
 		EB63019A1F297C12760748D3 /* Pods-LiftingDeviceCapstone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiftingDeviceCapstone.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LiftingDeviceCapstone/Pods-LiftingDeviceCapstone.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -161,6 +163,7 @@
 				DC116BD72427F8BB0093C40B /* Info.plist */,
 				DC116BCF2427F8B90093C40B /* LiftingDeviceCapstone.xcdatamodeld */,
 				DCB5287524301BE300EF53A0 /* WeightPeripheral.swift */,
+				DCF028EE243FA06D003139CC /* imuData.swift */,
 			);
 			path = LiftingDeviceCapstone;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				DCB5287624301BE300EF53A0 /* WeightPeripheral.swift in Sources */,
 				DC116BC92427F8B90093C40B /* FirstViewController.swift in Sources */,
 				DC116BC52427F8B90093C40B /* AppDelegate.swift in Sources */,
+				DCF028EF243FA06D003139CC /* imuData.swift in Sources */,
 				DC116BD12427F8B90093C40B /* LiftingDeviceCapstone.xcdatamodeld in Sources */,
 				DC116BC72427F8B90093C40B /* SceneDelegate.swift in Sources */,
 			);
