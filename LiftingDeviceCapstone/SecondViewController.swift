@@ -26,6 +26,8 @@ class SecondViewController: UIViewController, CBPeripheralDelegate, CBCentralMan
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //chtBarpath.setVisibleXRangeMaximum(0.5)
+        //chtBarpath.setVisibleXRangeMinimum(-0.5)
         // Do any additional setup after loading the view.
     }
     @IBAction func btnBarpath(_ sender: Any) {
@@ -57,7 +59,7 @@ class SecondViewController: UIViewController, CBPeripheralDelegate, CBCentralMan
         chtBarpath.backgroundColor = UIColor.white
         
         chtBarpath.chartDescription?.text = "Barpath"
-        chtBarpath.animate(xAxisDuration: (Double(x_position.count) * 0.01))
+        // chtBarpath.animate(xAxisDuration: (Double(x_position.count) * 0.01))
     }
     
     func processDistance() {

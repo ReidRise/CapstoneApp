@@ -70,10 +70,10 @@ class FirstViewController: UIViewController, CBPeripheralDelegate, CBCentralMana
         txtAvgVel.text = String(velocity_max) // display this velocity
         
         // Calculate total time elapsed from inputs.
-        total_time = Double(velocity_y.count) * 0.01                  // Multiplies the number of samples by the sample rate to determine total time
+        total_time = Double(velocity_y.count) * 0.01                   // Multiplies the number of samples by the sample rate to determine total time
         
         // Calculate and display total power
-        let total_power = ((weight * 9.8) * distance) / total_time    // Calculate sum of work and divide it by the total time
+        let total_power = ((weight * 32.2) * distance) / total_time    // Calculate sum of work and divide it by the total time
         txtTotPower.text = String(total_power)
         
         updateGraph()
@@ -250,21 +250,28 @@ class FirstViewController: UIViewController, CBPeripheralDelegate, CBCentralMana
             unprocessed_x = Int16(unprocessed_data[i + 1]) << 8
             unprocessed_x |= Int16(unprocessed_data[i])
             print("Unprocessed x: \(unprocessed_x)")
-            acceleration_x.append(Double(unprocessed_x) * 0.01)                                  // Convert to m/s^2
-            velocity_x.append((acceleration_x[j] * 0.01) + velocity_x[j])
+            acceleration_x.append(Double(unprocessed_x) * 0.01)                   // Convert to m/s^2
+            velocity_x.append(((acceleration_x[j] * 0.01) + velocity_x[j]))
             
             // Process Y coord data
             unprocessed_y = Int16(unprocessed_data[i + 3]) << 8
             unprocessed_y |= Int16(unprocessed_data[i + 2])
             print("Unprocessed y: \(unprocessed_y)")
             acceleration_y.append(Double(unprocessed_y) * 0.01)
-            velocity_y.append((acceleration_y[j] * 0.01) + velocity_y[j])
+            velocity_y.append(((acceleration_y[j] * 0.01) + velocity_y[j]))
             
             j += 1
             i += 4
         }
+        
         // Normalize Velocity
         normalizeCurve()
+        
+        for i in 0 ..< velocity_x.count {                                          // convert to ft/s
+            velocity_x[i] *=  3.28084
+            velocity_y[i] *=  3.28084
+        }
+        
         imuData.sharedData.velocity_x = velocity_x
         imuData.sharedData.velocity_y = velocity_y
     }
