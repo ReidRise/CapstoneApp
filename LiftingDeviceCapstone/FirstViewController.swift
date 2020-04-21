@@ -56,16 +56,18 @@ class FirstViewController: UIViewController, CBPeripheralDelegate, CBCentralMana
         weight = input! // Set weight to input
         
         // Calculate avg velocity and populate acceleration array for power calculation
-        var velocity_sum = 0.0
+        var velocity_max = 0.0
         var distance = 0.0
         for i in 0 ..< velocity_y.count {
             if velocity_y[i] > 0.0 {
-                velocity_sum += velocity_y[i]                         // Add velocity of to the sum of velocities
+                if velocity_y[i] > velocity_max{
+                    velocity_max = velocity_y[i]
+                }
                 distance += velocity_y[i] * 0.01
             }
         }
-        let velocity_avg = (velocity_sum / Double(velocity_y.count))  // Divide by number of entries to get the average
-        txtAvgVel.text = String(velocity_avg) // display this velocity
+        
+        txtAvgVel.text = String(velocity_max) // display this velocity
         
         // Calculate total time elapsed from inputs.
         total_time = Double(velocity_y.count) * 0.01                  // Multiplies the number of samples by the sample rate to determine total time
