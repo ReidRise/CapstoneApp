@@ -175,7 +175,6 @@ class FirstViewController: UIViewController, CBPeripheralDelegate, CBCentralMana
         }
     }
     
-    // I dont know what this does but it wont work without it
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         if let e = error {
             print("ERROR didUpdateValue \(e)")
@@ -236,7 +235,7 @@ class FirstViewController: UIViewController, CBPeripheralDelegate, CBCentralMana
     
     func processNewData(){
         // print(unprocessed_data)
-        while (unprocessed_data.count % 4) != 0 {                                                // This is extremely temp and should not be used in final app code
+        while (unprocessed_data.count % 4) != 0 {                                  
             unprocessed_data.remove(at: unprocessed_data.count - 1)
             print("OOF VERY BAD PLEASE DONT PRINT ME")
         }
@@ -264,15 +263,15 @@ class FirstViewController: UIViewController, CBPeripheralDelegate, CBCentralMana
             i += 4
         }
         
-        // Normalize Velocity
-        normalizeCurve()
-        
         for i in 0 ..< velocity_x.count {                                          // convert to ft/s
             velocity_x[i] *=  3.28084
             velocity_y[i] *=  3.28084
         }
         
-        imuData.sharedData.velocity_x = velocity_x
+        // Normalize Velocity
+        normalizeCurve()
+        
+        imuData.sharedData.velocity_x = velocity_x                                 // Share data with second view
         imuData.sharedData.velocity_y = velocity_y
     }
     
